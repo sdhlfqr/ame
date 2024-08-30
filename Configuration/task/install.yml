@@ -57,3 +57,10 @@ actions:
     wait: true
     weight: 4
 
+  - !writeStatus: { status: 'Installing Deluge' }
+  - !powerShell:
+    command: 'winget install DelugeTeam.Deluge --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 38
+
