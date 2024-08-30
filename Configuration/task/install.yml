@@ -64,3 +64,11 @@ actions:
     wait: true
     weight: 38
 
+  #=== Productivity
+  - !writeStatus: { status: 'Installing Ungoogled Chromium Browser' }
+  - !powerShell:
+    command: 'winget install eloston.ungoogled-chromium --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 92
+
