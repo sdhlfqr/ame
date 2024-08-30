@@ -109,3 +109,11 @@ actions:
     wait: true
     weight: 36
 
+  #=== Gaming
+  - !writeStatus: { status: 'Installing Steam' }
+  - !powerShell:
+    command: 'winget install Valve.Steam --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 4
+
