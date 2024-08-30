@@ -1,0 +1,5 @@
+---
+title: install
+description: Installs packages with WinGet.
+privilege: TrustedInstaller
+actions:
