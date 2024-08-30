@@ -1,0 +1,96 @@
+---
+title: tweak-control-panel
+description: Tweaks modern control panel settings.
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: { status: 'Tweaking modern control panel settings.' }
+
+  # Remove settings synchronisation.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync'
+    value: 'DisableSettingSync'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync'
+    value: 'DisableSettingSyncUserOverride'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Remove Chat button settings.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat'
+    value: 'ChatIcon'
+    type: REG_DWORD
+    data: '3'
+    weight: 2
+
+  # Remove Copilot button settings.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot'
+    value: 'TurnOffWindowsCopilot'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Remove suggested content.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+    value: 'SubscribedContent-338393Enabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+    value: 'SubscribedContent-353694Enabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+    value: 'SubscribedContent-353696Enabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Switch time-servers priority.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
+    value: ''
+    type: REG_SZ
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
+    value: '1'
+    type: REG_SZ
+    data: 'pool.ntp.org'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
+    value: '2'
+    type: REG_SZ
+    data: 'time.windows.com'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
+    value: '3'
+    type: REG_SZ
+    data: 'time.nist.gov'
+    weight: 2
+
+  # Disable Windows activation validation.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform'
+    value: 'NoGenTicket'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
