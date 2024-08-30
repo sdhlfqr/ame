@@ -3,3 +3,27 @@ title: install
 description: Installs packages with WinGet.
 privilege: TrustedInstaller
 actions:
+  #=== Packages Manager
+  - !writeStatus: { status: 'Updating and configuring WinGet package manager.' }
+
+  # Configuring WinGet
+  - !cmd:
+    command: 'copy /y "configs\winget.json" "%LOCALAPPDATA%\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"'
+    exeDir: true
+    wait: true
+    weight: 2
+
+  # Updating WinGet.
+  - !powerShell:
+    command: 'winget source update'
+    runas: currentUserElevated
+    wait: true
+    weight: 4
+
+  # Updating AppInstaller.
+  - !powerShell:
+    command: 'winget update Microsoft.AppInstaller --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 16
+

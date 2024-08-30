@@ -1,0 +1,43 @@
+{
+  "$schema": "https://aka.ms/winget-settings.schema.json",
+  "source": {
+    "autoUpdateIntervalInMinutes": 1
+  },
+  "installBehavior": {
+    "disableInstallNotes": true,
+    "skipDependencies": false,
+    "preferences": {
+      "scope": "user",
+      "architectures": [
+        "x64"
+      ],
+      "locale": [
+        "en-GB",
+        "ar-SA",
+        "de-DE",
+        "fr-FR",
+        "ja-JP"
+      ]
+    }
+  },
+  "uninstallBehavior": {
+    "purgePortablePackage": true
+  },
+  "visual": {
+    "progressBar": "accent",
+    "anonymizeDisplayedPaths": true
+  },
+  "logging": {
+    "level": "error"
+  },
+  "interactivity": {
+    "disable": true
+  },
+  "telemetry": {
+    "disable": true
+  },
+  "experimentalFeatures": {
+    "directMSI": true,
+    "resume": true
+  }
+}
