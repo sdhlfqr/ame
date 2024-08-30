@@ -1,0 +1,149 @@
+---
+title: tweak-explorer
+description: Tweaks Windows file explorer settings.
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: { status: 'Tweaking file explorer settings.' }
+
+  #=== File Explorer
+  # Disable frequently used items list.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start'
+    value: 'ShowFrequentList'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable recently used items list.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Start'
+    value: 'ShowRecentList'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable photos gallery.
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_41040327\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}'
+    operation: delete
+    weight: 2
+
+  # Disable automatic checkboxes activation.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'AutoCheckSelect'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Context Menu
+  # Remove 'Open with Paint 3D' option for photos.
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.bmp\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpeg\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpe\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.png\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.gif\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.tif\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.tiff\Shell\3D Edit'
+    operation: add
+    weight: 2
+
+  #=== File Associations
+  # Configure handling for CAB files.
+  - !registryKey:
+    path: 'HKEY_CLASSES_ROOT\CABFolder\CLSID'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKEY_CLASSES_ROOT\SystemFileAssociations\.cab\CLSID'
+    operation: add
+    weight: 2
+
+  # Configure handling for ZIP files.
+  - !registryKey:
+    path: 'HKEY_CLASSES_ROOT\CompressedFolder\CLSID'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\CLSID'
+    operation: add
+    weight: 2
+
+  #=== Default Apps
+  # Hide contacts.
+  - !registryKey:
+    path: 'HKCR\certificate_wab_auto_file'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\wab_auto_file'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\contact_wab_auto_file'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\group_wab_auto_file'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\vcard_wab_auto_file'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\WAB.AssocProtocol.LDAP'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\TIFImage.Document'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCR\PhotoViewer.FileAssoc.Tiff'
+    operation: add
+    weight: 2
