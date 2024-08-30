@@ -1,0 +1,299 @@
+---
+title: tweak-shell
+description: Tweaks system shell settings.
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: { status: 'Tweaking system shell settings.' }
+
+  #=== Taskbar
+  # Hide meet now button.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+    value: 'HideSCAMeetNow'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Hide tasks view button.
+  - !registryValue:
+    path: 'HKU\S-1-5-18\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'ShowTaskViewButton'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'ShowTaskViewButton'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Hide search box.
+  - !registryValue:
+    path: 'HKU\S-1-5-18\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'SearchboxTaskbarMode'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'SearchboxTaskbarMode'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Hide Cortana button.
+  - !registryValue:
+    path: 'HKU\S-1-5-18\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'ShowCortanaButton'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'ShowCortanaButton'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Tray
+  # Auto hide tray icons.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+    value: 'EnableAutoTray'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Search
+  # Enable full disks indexing.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows Search\Gather\Windows\SystemIndex'
+    value: 'EnableFindMyFiles'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Disable encrypted items indexing.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AllowIndexingEncryptedStoresOrItems'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable Cortana.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AllowCortana'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'CortanaConsent'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'CortanaInAmbientMode'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
+    value: 'VoiceActivationEnableAboveLockscreen'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable voice search.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE'
+    value: 'DisableVoice'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
+    value: 'VoiceActivationDefaultOn'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
+    value: 'ModelDownloadAllowed'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable web search.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AllowCloudSearch'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'DisableWebSearch'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'ConnectedSearchUseWeb'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'ConnectedSearchUseWeb'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'ConnectedSearchUseWebOverMeteredConnections'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'BingSearchEnabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings'
+    value: 'SafeSearchMode'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable search history.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+    value: 'DisableSearchBoxSuggestions'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'HistoryViewEnabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable system language detection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AlwaysUseAutoLangDetection'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable location detection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AllowSearchToUseLocation'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
+    value: 'AllowSearchToUseLocation'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable data collection.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization'
+    value: 'RestrictImplicitTextCollection'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization'
+    value: 'RestrictImplicitInkCollection'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore'
+    value: 'AcceptedPrivacyPolicy'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Personalization\Settings'
+    value: 'AcceptedPrivacyPolicy'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore'
+    value: 'HarvestContacts'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost'
+    value: 'EnableWebContentEvaluation'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\Control Panel\International\User Profile'
+    value: 'HttpAcceptLanguageOptOut'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  #=== Notifications
+  # Disable installed on unsupported hardware alerts.
+  - !registryValue:
+    path: 'HKCU\Control Panel\UnsupportedHardwareNotificationCache'
+    value: 'SV1'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\Control Panel\UnsupportedHardwareNotificationCache'
+    value: 'SV2'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disabling setup Windows backup reminders.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.BackupReminder'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2

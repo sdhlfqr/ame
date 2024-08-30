@@ -5,6 +5,7 @@ privilege: TrustedInstaller
 actions:
   - !task: { path: 'task\tweak\boot-power.yml' }
   - !task: { path: 'task\tweak\explorer.yml' }
+  - !task: { path: 'task\tweak\shell.yml' }
   - !task: { path: 'task\tweak\control-panel.yml' }
   - !task: { path: 'task\tweak\security.yml' }
   - !task: { path: 'task\tweak\telemetry.yml' }
