@@ -3,3 +3,4 @@ title: config
 description: Optimise software configurations.
 privilege: TrustedInstaller
 actions:
+  - !task: { path: 'task\config\adobe-acrobat.yml' }
