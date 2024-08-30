@@ -87,3 +87,10 @@ actions:
     wait: true
     weight: 178
 
+  - !writeStatus: { status: 'Installing Signal' }
+  - !powerShell:
+    command: 'winget install OpenWhisperSystems.Signal --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 128
+
