@@ -125,3 +125,10 @@ actions:
     wait: true
     weight: 600
 
+  #=== Develop
+  - !writeStatus: { status: 'Installing Git' }
+  - !powerShell:
+    command: 'winget install Git.Git --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 66
