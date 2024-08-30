@@ -94,3 +94,11 @@ actions:
     wait: true
     weight: 128
 
+  #=== Media
+  - !writeStatus: { status: 'Installing Spotify' }
+  - !powerShell:
+    command: 'winget install Spotify.Spotify --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 104
+
