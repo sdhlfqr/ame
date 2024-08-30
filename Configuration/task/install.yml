@@ -72,3 +72,10 @@ actions:
     wait: true
     weight: 92
 
+  - !writeStatus: { status: 'Installing KeePassXC' }
+  - !powerShell:
+    command: 'winget install KeePassXCTeam.KeePassXC --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 32
+
