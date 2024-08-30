@@ -3,3 +3,4 @@ title: tweak
 description: Performance, productivity and privacy optimizations.
 privilege: TrustedInstaller
 actions:
+  - !task: { path: 'task\tweak\boot-power.yml' }
