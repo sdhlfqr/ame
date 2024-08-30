@@ -102,3 +102,10 @@ actions:
     wait: true
     weight: 104
 
+  - !writeStatus: { status: 'Installing Media Player Classic' }
+  - !powerShell:
+    command: 'winget install CodecGuide.K-LiteCodecPack.Standard --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 36
+
