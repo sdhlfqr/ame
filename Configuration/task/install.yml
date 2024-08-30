@@ -49,3 +49,11 @@ actions:
 
   # TODO: Install .NET 4.5 and .NET 3.5
 
+  #=== Utilities
+  - !writeStatus: { status: 'Installing 7-Zip' }
+  - !powerShell:
+    command: 'winget install 7zip.7zip --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 4
+
