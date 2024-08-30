@@ -27,3 +27,25 @@ actions:
     wait: true
     weight: 16
 
+  #=== Libraries
+  - !writeStatus: { status: 'Installing Visual C++ Redistributable (2005-2022)' }
+  - !powerShell:
+    command: |
+      winget install Microsoft.VCRedist.2005.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2005.x64 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2008.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2008.x64 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2010.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2010.x64 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2012.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2012.x64 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2013.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2013.x64 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2015+.x86 --accept-source-agreements --accept-package-agreements
+      winget install Microsoft.VCRedist.2015+.x64 --accept-source-agreements --accept-package-agreements
+    runas: currentUserElevated
+    wait: true
+    weight: 48
+
+  # TODO: Install .NET 4.5 and .NET 3.5
+
