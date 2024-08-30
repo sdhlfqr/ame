@@ -79,3 +79,11 @@ actions:
     wait: true
     weight: 32
 
+  #=== Socials
+  - !writeStatus: { status: 'Installing WhatsApp' }
+  - !powerShell:
+    command: 'winget install 9NKSQGP7F2NH --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 178
+
