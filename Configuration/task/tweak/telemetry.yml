@@ -1,0 +1,116 @@
+---
+title: tweak-telemetry
+description: Tweaks data collection and telemetry settings.
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: { status: 'Tweaking data collection and telemetry settings.' }
+
+  # Disable telemetry and data collection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection'
+    value: 'AllowTelemetry'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection'
+    value: 'AllowTelemetry'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+    value: 'AllowTelemetry'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable error reporting collection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting'
+    value: 'Disabled'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting'
+    value: 'DontSendAdditionalData'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Disable auto logger.
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener'
+    value: 'Start'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger'
+    value: 'Start'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable hotspot data collection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting'
+    value: 'value'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable advertising information collection.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo'
+    value: 'DisabledByGroupPolicy'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Disable device metadata collection.
+  - !registryKey:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata'
+    operation: add
+    weight: 2
+
+  # Disable Windows feeds.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds'
+    value: 'EnableFeeds'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System'
+    value: 'EnableActivityFeed'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests'
+    value: 'AllowNewsAndInterests'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Dsh'
+    value: 'AllowNewsAndInterests'
+    type: REG_DWORD
+    data: '0'
+    weight: 2

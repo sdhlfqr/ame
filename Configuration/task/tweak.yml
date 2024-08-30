@@ -4,3 +4,4 @@ description: Performance, productivity and privacy optimizations.
 privilege: TrustedInstaller
 actions:
   - !task: { path: 'task\tweak\boot-power.yml' }
+  - !task: { path: 'task\tweak\telemetry.yml' }
