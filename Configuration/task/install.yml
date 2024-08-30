@@ -117,3 +117,11 @@ actions:
     wait: true
     weight: 4
 
+  #=== Design
+  - !writeStatus: { status: 'Installing Affinity Designer' }
+  - !powerShell:
+    command: 'winget install 9N2D0P16C80H --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 600
+
