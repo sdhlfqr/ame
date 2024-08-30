@@ -5,4 +5,5 @@ privilege: Admin
 actions:
   - !task: { path: 'task\init.yml' }
   - !task: { path: 'task\install.yml' }
+  - !task: { path: 'task\config.yml' }
   - !task: { path: 'task\revert.yml' }
