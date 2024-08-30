@@ -126,6 +126,13 @@ actions:
     weight: 600
 
   #=== Develop
+  - !writeStatus: { status: 'Installing RustRover' }
+  - !powerShell:
+    command: 'winget install JetBrains.RustRover --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 560
+
   - !writeStatus: { status: 'Installing Git' }
   - !powerShell:
     command: 'winget install Git.Git --accept-source-agreements --accept-package-agreements'
