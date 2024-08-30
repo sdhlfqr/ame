@@ -1,0 +1,5 @@
+---
+title: tweak
+description: Performance, productivity and privacy optimizations.
+privilege: TrustedInstaller
+actions:
