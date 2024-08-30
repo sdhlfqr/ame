@@ -4,3 +4,4 @@ description: Amelioration script
 privilege: Admin
 actions:
   - !task: { path: 'task\init.yml' }
+  - !task: { path: 'task\revert.yml' }

@@ -1,0 +1,14 @@
+---
+title: revert
+description: Restores system settings to defaults.
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: { status: 'Restoring default settings by reverting initial tweaks.' }
+
+  # Re-enabling security and maintenance notifications.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
