@@ -1,0 +1,26 @@
+---
+title: config-git
+description: Configures Git.
+actions:
+  - !writeStatus: { status: 'Configuring Git.' }
+
+  # Trust all directories.
+  - !powerShell:
+    command: 'git config --system --add safe.directory "*"'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
+
+  # Disable GCM machine-wide.
+  - !powerShell:
+    command: '[ Environment ]::SetEnvironmentVariable("GCM_INTERACTIVE", "Never", "Machine")'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
+
+  # Save GitHub as a known host.
+  - !powerShell:
+    command: 'ssh-keyscan -t rsa, ecdsa, ed25519 github.com >> "C:\Program Files\Git\etc\ssh\ssh_known_hosts"'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
