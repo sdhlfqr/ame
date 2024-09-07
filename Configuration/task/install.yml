@@ -135,7 +135,28 @@ actions:
 
   - !writeStatus: { status: 'Installing Git' }
   - !powerShell:
-    command: 'winget install Git.Git --accept-source-agreements --accept-package-agreements'
+    command: |
+      winget install Git.Git --custom\
+      "/SP- \
+      /VERYSILENT \
+      /NOCANCEL \
+      /NORESTART \
+      /CLOSEAPPLICATIONS \
+      /RESTARTAPPLICATIONS \
+      /NOICONS \
+      /COMPONENTS='gitlfs,scalar' \
+      /o:EditorOption=Notepad++ \
+      /o:DefaultBranchOption=main \
+      /o:PathOption=CmdTools \
+      /o:SSHOption=ExternalOpenSSH \
+      /o:CurlOption=WinSSL \
+      /o:CRLFOption=CRLFAlways \
+      /o:BashTerminalOption=ConHost \
+      /o:GitPullBehaviorOption=Merge \
+      /o:UseCredentialManager=Disabled \
+      /o:PerformanceTweaksFSCache=Enabled \
+      /o:EnableSymlinks=Enabled" \
+      --accept-source-agreements --accept-package-agreements'
     runas: currentUserElevated
     wait: true
     weight: 66
