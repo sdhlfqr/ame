@@ -213,6 +213,14 @@ actions:
     weight: 2
 
   #=== Taskbar
+  # Hide chat button.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'TaskbarMn'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
   # Hide meet now button.
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
