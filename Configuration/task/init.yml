@@ -3,6 +3,7 @@ title: init
 description: Prepares the system for installation.
 privilege: TrustedInstaller
 actions:
+  #=== DNS
   - !writeStatus: { status: 'Updating hosts file to block unwanted content and telemetry.' }
 
   # Copy hosts file.
@@ -18,6 +19,7 @@ actions:
     wait: true
     weight: 8
 
+  #=== Performance
   - !writeStatus: { status: 'Optimising scripts runtime and changing the power plan.' }
 
   # Precompile .NET assemblies with ngen.
@@ -34,6 +36,7 @@ actions:
     wait: true
     weight: 2
 
+  #=== Display
   - !writeStatus: { status: 'Keeping monitor on and turning off notifications during install.' }
 
   # Disable monitor timeout on AC.
