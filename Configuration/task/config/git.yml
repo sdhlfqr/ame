@@ -24,3 +24,10 @@ actions:
     runas: currentUserElevated
     wait: true
     weight: 2
+
+  # Allow paths longer than the Windows 'MAX_PATH' limit.
+  - !powerShell:
+    command: 'git config --global core.longpaths true'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
