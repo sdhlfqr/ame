@@ -274,6 +274,14 @@ actions:
     data: '0'
     weight: 2
 
+  # Enable end task by right click.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings'
+    value: 'TaskbarEndTask'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
   #=== Tray
   # Auto hide tray icons.
   - !registryValue:
