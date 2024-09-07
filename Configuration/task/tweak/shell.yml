@@ -291,6 +291,14 @@ actions:
     data: '0'
     weight: 2
 
+  # Disable peek desktop.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    value: 'DisablePreviewDesktop'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
   #=== Search
   # Enable full disks indexing.
   - !registryValue:
