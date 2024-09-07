@@ -409,7 +409,7 @@ actions:
     data: '0'
     weight: 2
 
-  # Disable search history.
+  # Disable search suggestions.
   - !registryValue:
     path: 'HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer'
     value: 'DisableSearchBoxSuggestions'
@@ -417,6 +417,7 @@ actions:
     data: '1'
     weight: 2
 
+  # Disable search history.
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'HistoryViewEnabled'
