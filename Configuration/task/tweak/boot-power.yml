@@ -10,11 +10,6 @@ actions:
     command: 'bcdedit /set {default} bootmenupolicy legacy'
     weight: 2
 
-  # Prevent unauthorized access through recovery environment.
-  - !cmd:
-    command: 'bcdedit /set {current} recoveryenabled no'
-    weight: 2
-
   # Disable hibernation to ensure NTFS drives are accessible.
   - !cmd:
     command: 'powercfg /hibernate off'

@@ -284,14 +284,6 @@ actions:
     data: '1'
     weight: 2
 
-  # Disable encrypted items indexing.
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
-    value: 'AllowIndexingEncryptedStoresOrItems'
-    type: REG_DWORD
-    data: '0'
-    weight: 2
-
   # Disable Cortana.
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'

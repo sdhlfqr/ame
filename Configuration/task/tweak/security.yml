@@ -5,6 +5,19 @@ privilege: TrustedInstaller
 actions:
   - !writeStatus: { status: 'Tweaking security settings.' }
 
+  # Prevent unauthorized access through recovery environment.
+  - !cmd:
+    command: 'bcdedit /set {current} recoveryenabled no'
+    weight: 2
+
+  # Disable encrypted items indexing.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+    value: 'AllowIndexingEncryptedStoresOrItems'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
   # Block known vulnerable drivers.
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Config'
