@@ -58,6 +58,14 @@ actions:
     data: '0'
     weight: 2
 
+  # Set Time reference to UTC.
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation'
+    value: 'RealTimeIsUniversal'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
   # Switch time-servers priority.
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
