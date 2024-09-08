@@ -5,16 +5,6 @@ privilege: TrustedInstaller
 actions:
   - !writeStatus: { status: 'Tweaking system for performance, productivity and privacy.' }
 
-  # Enable legacy boot menu for advanced startup options.
-  - !cmd:
-    command: 'bcdedit /set {default} bootmenupolicy legacy'
-    weight: 2
-
-  # Prevent unauthorized access through recovery environment.
-  - !cmd:
-    command: 'bcdedit /set {current} recoveryenabled no'
-    weight: 2
-
   # Disable hibernation to ensure NTFS drives are accessible.
   - !cmd:
     command: 'powercfg /hibernate off'
@@ -27,21 +17,18 @@ actions:
     type: REG_SZ
     data: '2000'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Control'
     value: 'WaitToKillServiceTimeout'
     type: REG_SZ
     data: '2000'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Control'
     value: 'HungAppTimeout'
     type: REG_SZ
     data: '2000'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Control'
     value: 'AutoEndTasks'
@@ -86,57 +73,46 @@ actions:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_41040327\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}' # Gallery
     operation: delete
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}' # Local Downloads
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}' # My Music
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}' # Local Pictures
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}' # Downloads
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}' # My Pictures
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}' # Local Music
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A0953C92-50DC-43bf-BE83-3742FED03C9C}' # My Videos
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{A8CDFF1C-4878-43be-B5FD-F8091C1C60D0}' # Documents
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}' # Desktop
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}' # Local Documents
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}' # Local Videos
     operation: add
@@ -163,42 +139,34 @@ actions:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.bmp\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpeg\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpe\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.png\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.gif\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.tif\Shell\3D Edit'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKLM\SOFTWARE\Classes\SystemFileAssociations\.tiff\Shell\3D Edit'
     operation: add
@@ -209,7 +177,6 @@ actions:
     path: 'HKEY_CLASSES_ROOT\CABFolder\CLSID'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKEY_CLASSES_ROOT\SystemFileAssociations\.cab\CLSID'
     operation: add
@@ -220,7 +187,6 @@ actions:
     path: 'HKEY_CLASSES_ROOT\CompressedFolder\CLSID'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\CLSID'
     operation: add
@@ -231,37 +197,30 @@ actions:
     path: 'HKCR\certificate_wab_auto_file'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\wab_auto_file'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\contact_wab_auto_file'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\group_wab_auto_file'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\vcard_wab_auto_file'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\WAB.AssocProtocol.LDAP'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\TIFImage.Document'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCR\PhotoViewer.FileAssoc.Tiff'
     operation: add
@@ -274,7 +233,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat'
     value: 'ChatIcon'
@@ -305,7 +263,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
     value: 'ShowTaskViewButton'
@@ -320,7 +277,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'SearchboxTaskbarMode'
@@ -335,21 +291,18 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'CortanaConsent'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'CortanaInAmbientMode'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
     value: 'VoiceActivationEnableAboveLockscreen'
@@ -364,14 +317,12 @@ actions:
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
     value: 'VoiceActivationDefaultOn'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences'
     value: 'ModelDownloadAllowed'
@@ -386,42 +337,36 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
     value: 'DisableWebSearch'
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
     value: 'ConnectedSearchUseWeb'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
     value: 'ConnectedSearchUseWeb'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
     value: 'ConnectedSearchUseWebOverMeteredConnections'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'BingSearchEnabled'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings'
     value: 'SafeSearchMode'
@@ -460,7 +405,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search'
     value: 'AllowSearchToUseLocation'
@@ -475,42 +419,36 @@ actions:
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization'
     value: 'RestrictImplicitInkCollection'
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore'
     value: 'AcceptedPrivacyPolicy'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Personalization\Settings'
     value: 'AcceptedPrivacyPolicy'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore'
     value: 'HarvestContacts'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost'
     value: 'EnableWebContentEvaluation'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\Control Panel\International\User Profile'
     value: 'HttpAcceptLanguageOptOut'
@@ -525,7 +463,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
     value: 'ShowCortanaButton'
@@ -557,21 +494,6 @@ actions:
     data: '0'
     weight: 2
 
-  # Disable installed on unsupported hardware alerts.
-  - !registryValue:
-    path: 'HKCU\Control Panel\UnsupportedHardwareNotificationCache'
-    value: 'SV1'
-    type: REG_DWORD
-    data: '0'
-    weight: 2
-
-  - !registryValue:
-    path: 'HKCU\Control Panel\UnsupportedHardwareNotificationCache'
-    value: 'SV2'
-    type: REG_DWORD
-    data: '0'
-    weight: 2
-
   # Disabling setup Windows backup reminders.
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.BackupReminder'
@@ -587,7 +509,6 @@ actions:
     type: REG_DWORD
     data: '2'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync'
     value: 'DisableSettingSyncUserOverride'
@@ -618,14 +539,12 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
     value: 'SubscribedContent-353694Enabled'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
     value: 'SubscribedContent-353696Enabled'
@@ -648,26 +567,28 @@ actions:
     type: REG_SZ
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
     value: '1'
     type: REG_SZ
     data: 'pool.ntp.org'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
     value: '2'
     type: REG_SZ
     data: 'time.windows.com'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers'
     value: '3'
     type: REG_SZ
     data: 'time.nist.gov'
+    weight: 2
+
+  # Prevent unauthorized access through recovery environment.
+  - !cmd:
+    command: 'bcdedit /set {current} recoveryenabled no'
     weight: 2
 
   # Block known vulnerable drivers.
@@ -686,15 +607,13 @@ actions:
     data: '0'
     weight: 2
 
-  # Disable automatic Wi-Fi Sense connections to avoid harmful networks.
+  # Disable Wi-Fi Sense connections to avoid harmful networks.
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots'
     value: 'value'
     type: REG_DWORD
     data: '0'
     weight: 2
-
-  # Disable hotspot data collection.
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting'
     value: 'value'
@@ -707,26 +626,34 @@ actions:
     command: 'sc config lanmanworkstation depend= bowser/mrxsmb20/nsi'
     wait: true
     weight: 8
-
   - !cmd:
     command: 'sc config mrxsmb10 start= disabled'
     wait: true
     weight: 8
-
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:"SMB1Protocol"'
+    wait: true
+    weight: 32
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:"SMB1Protocol-Client"'
+    wait: true
+    weight: 32
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:"SMB1Protocol-Server"'
+    wait: true
+    weight: 32
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters'
     value: 'SMB1'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\services\mrxsmb10'
     value: 'Start'
     type: REG_DWORD
     data: '4'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation'
     value: 'DependOnService'
@@ -741,57 +668,18 @@ actions:
     type: REG_DWORD
     data: '181'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers'
     value: 'DisableAutoplay'
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
     value: 'NoAutorun'
     type: REG_DWORD
     data: '1'
     weight: 2
-
-  # Install apps from any downloads directory.
-  - !registryValue:
-    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments'
-    value: 'SaveZoneInformation'
-    type: REG_DWORD
-    data: '1'
-    weight: 2
-
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments'
-    value: 'SaveZoneInformation'
-    type: REG_DWORD
-    data: '1'
-    weight: 2
-
-  # Install apps with unsigned certificates.
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers'
-    value: 'authenticodeenabled'
-    type: REG_DWORD
-    data: '0'
-    weight: 2
-
-  # Disable SmartScreen.
-  - !registryValue:
-    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost'
-    value: 'ContentEvaluation'
-    type: REG_DWORD
-    data: '0'
-    weight: 2
-
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
-    value: 'SmartScreenEnabled'
-    type: REG_SZ
-    data: 'Off'
 
   # Hiding last logged-in username on lock screen.
   - !registryValue:
@@ -816,14 +704,12 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection'
     value: 'AllowTelemetry'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
     value: 'AllowTelemetry'
@@ -838,7 +724,6 @@ actions:
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting'
     value: 'DontSendAdditionalData'
@@ -853,7 +738,6 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger'
     value: 'Start'
@@ -868,7 +752,6 @@ actions:
     type: REG_DWORD
     data: '1'
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo'
     value: 'Enabled'
@@ -889,21 +772,18 @@ actions:
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System'
     value: 'EnableActivityFeed'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests'
     value: 'AllowNewsAndInterests'
     type: REG_DWORD
     data: '0'
     weight: 2
-
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Dsh'
     value: 'AllowNewsAndInterests'

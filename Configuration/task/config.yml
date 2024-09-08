@@ -5,21 +5,6 @@ privilege: TrustedInstaller
 actions:
   - !writeStatus: { status: 'Configuring system and software' }
 
-  #=== Windows
-  # Enable Developer mode.
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock'
-    value: 'AllowDevelopmentWithoutDevLicense'
-    type: REG_DWORD
-    data: '1'
-    weight: 2
-
-  - !powerShell:
-    command: 'DISM /Online /Add-Capability /CapabilityName:Tools.DeveloperMode.Core'
-    runas: currentUserElevated
-    wait: true
-    weight: 4
-
   #=== Adobe Acrobat
   - !registryKey:
     path: 'HKCU\SOFTWARE\Adobe'
@@ -198,7 +183,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
     value: 'PackagerPrompt'
@@ -233,7 +217,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint\Security'
     value: 'PackagerPrompt'
@@ -260,7 +243,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Options'
     operation: add
     weight: 2
-
   - !registryKey:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Options\vpref'
     operation: add
@@ -279,7 +261,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Security'
     value: 'PackagerPrompt'
@@ -312,7 +293,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Options'
     value: 'DontUpdateLinks'
@@ -325,7 +305,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
     value: 'PackagerPrompt'
@@ -360,7 +339,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint\Security'
     value: 'PackagerPrompt'
@@ -387,7 +365,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options'
     value: 'DontUpdateLinks'
@@ -400,7 +377,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options\WordMail'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options\WordMail'
     value: 'DontUpdateLinks'
@@ -413,7 +389,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
     value: 'PackagerPrompt'
@@ -454,7 +429,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Options'
     value: 'DontUpdateLinks'
@@ -467,7 +441,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
     value: 'PackagerPrompt'
@@ -502,7 +475,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint\Security'
     value: 'PackagerPrompt'
@@ -529,7 +501,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options'
     value: 'DontUpdateLinks'
@@ -542,7 +513,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options\WordMail'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options\WordMail'
     value: 'DontUpdateLinks'
@@ -555,7 +525,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
     value: 'PackagerPrompt'
@@ -596,7 +565,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Options'
     value: 'DontUpdateLinks'
@@ -609,7 +577,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
     value: 'PackagerPrompt'
@@ -644,7 +611,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint\Security'
     value: 'PackagerPrompt'
@@ -671,7 +637,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options'
     value: 'DontUpdateLinks'
@@ -684,7 +649,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options\WordMail'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options\WordMail'
     value: 'DontUpdateLinks'
@@ -697,7 +661,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
     value: 'PackagerPrompt'
@@ -732,7 +695,6 @@ actions:
     path: 'HKCU\SOFTWARE\Microsoft\Office\Common\Security'
     operation: add
     weight: 2
-
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Office\Common\Security'
     value: 'DisableAllActiveX'

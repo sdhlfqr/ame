@@ -3,31 +3,23 @@ title: install
 description: Installs packages with WinGet.
 privilege: TrustedInstaller
 actions:
-  #=== Packages Manager
   - !writeStatus: { status: 'Updating and configuring WinGet package manager.' }
-
-  # Configuring WinGet
+  - !powerShell:
+    command: 'winget update Microsoft.AppInstaller --accept-source-agreements --accept-package-agreements'
+    runas: currentUserElevated
+    wait: true
+    weight: 16
   - !cmd:
     command: 'copy /y "configs\winget.json" "%LOCALAPPDATA%\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"'
     exeDir: true
     wait: true
     weight: 2
-
-  # Updating WinGet.
   - !powerShell:
     command: 'winget source update'
     runas: currentUserElevated
     wait: true
     weight: 4
 
-  # Updating AppInstaller.
-  - !powerShell:
-    command: 'winget update Microsoft.AppInstaller --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 16
-
-  #=== Libraries
   - !writeStatus: { status: 'Installing Visual C++ Redistributable (2005-2022)' }
   - !powerShell:
     command: |
@@ -45,16 +37,15 @@ actions:
       winget install Microsoft.VCRedist.2015+.x64 --accept-source-agreements --accept-package-agreements
     runas: currentUserElevated
     wait: true
-    weight: 48
+    weight: 52
 
   - !writeStatus: { status: 'Installing .NET 3.5' }
   - !powerShell:
     command: 'DISM /Online /Enable-Feature /FeatureName:NetFx3 /All'
     runas: currentUserElevated
     wait: true
-    weight: 4
+    weight: 32
 
-  #=== Utilities
   - !writeStatus: { status: 'Installing 7-Zip' }
   - !powerShell:
     command: 'winget install 7zip.7zip --accept-source-agreements --accept-package-agreements'
@@ -69,7 +60,6 @@ actions:
     wait: true
     weight: 38
 
-  #=== Productivity
   - !writeStatus: { status: 'Installing Ungoogled Chromium Browser' }
   - !powerShell:
     command: 'winget install eloston.ungoogled-chromium --accept-source-agreements --accept-package-agreements'
@@ -84,22 +74,6 @@ actions:
     wait: true
     weight: 32
 
-  #=== Socials
-  - !writeStatus: { status: 'Installing WhatsApp' }
-  - !powerShell:
-    command: 'winget install 9NKSQGP7F2NH --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 178
-
-  - !writeStatus: { status: 'Installing Signal' }
-  - !powerShell:
-    command: 'winget install OpenWhisperSystems.Signal --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 128
-
-  #=== Media
   - !writeStatus: { status: 'Installing Spotify' }
   - !powerShell:
     command: 'winget install Spotify.Spotify --accept-source-agreements --accept-package-agreements'
@@ -114,7 +88,6 @@ actions:
     wait: true
     weight: 36
 
-  #=== Gaming
   - !writeStatus: { status: 'Installing Steam' }
   - !powerShell:
     command: 'winget install Valve.Steam --accept-source-agreements --accept-package-agreements'
@@ -122,7 +95,6 @@ actions:
     wait: true
     weight: 4
 
-  #=== Design
   - !writeStatus: { status: 'Installing Affinity Designer' }
   - !powerShell:
     command: 'winget install 9N2D0P16C80H --accept-source-agreements --accept-package-agreements'
@@ -130,7 +102,6 @@ actions:
     wait: true
     weight: 600
 
-  #=== Develop
   - !writeStatus: { status: 'Installing RustRover' }
   - !powerShell:
     command: 'winget install JetBrains.RustRover --accept-source-agreements --accept-package-agreements'
@@ -164,4 +135,4 @@ actions:
       --accept-source-agreements --accept-package-agreements'
     runas: currentUserElevated
     wait: true
-    weight: 66
+    weight: 68
