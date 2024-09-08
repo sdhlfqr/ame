@@ -47,7 +47,12 @@ actions:
     wait: true
     weight: 48
 
-  # TODO: Install .NET 4.5 and .NET 3.5
+  - !writeStatus: { status: 'Installing .NET 3.5' }
+  - !powerShell:
+    command: 'DISM /Online /Enable-Feature /FeatureName:NetFx3 /All'
+    runas: currentUserElevated
+    wait: true
+    weight: 4
 
   #=== Utilities
   - !writeStatus: { status: 'Installing 7-Zip' }
