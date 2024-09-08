@@ -3,10 +3,9 @@ title: init
 description: Prepares the system for installation.
 privilege: TrustedInstaller
 actions:
-  #=== DNS
-  - !writeStatus: { status: 'Updating hosts file to block unwanted content and telemetry.' }
+  - !writeStatus: { status: 'Preparing the system for installation.' }
 
-  # Copy hosts file.
+  # Updating hosts file to block unwanted content and telemetry.
   - !cmd:
     command: 'copy /y "configs\hosts" "%WINDIR%\System32\drivers\etc\hosts"'
     exeDir: true
@@ -19,10 +18,7 @@ actions:
     wait: true
     weight: 8
 
-  #=== Performance
-  - !writeStatus: { status: 'Optimising scripts runtime and changing the power plan.' }
-
-  # Precompile .NET assemblies with ngen.
+  # Optimise PowerShell by compiling .NET assemblies with ngen.
   - !run:
     exe: 'PowerShell'
     args: '-NoP -ExecutionPolicy Bypass -File scripts\turbo-powershell.ps1'
@@ -35,9 +31,6 @@ actions:
     command: 'powercfg /S 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
     wait: true
     weight: 2
-
-  #=== Display
-  - !writeStatus: { status: 'Keeping monitor on and turning off notifications during install.' }
 
   # Disable monitor timeout on AC.
   - !cmd:
