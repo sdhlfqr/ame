@@ -1,0 +1,24 @@
+name: Archive and Release
+env:
+  FILENAME: 'AME-${{ github.ref_name }}.apbx'
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Archive
+        run: |
+          7z a -pmalte -mhe=on ${{ env.FILENAME }} ./*
+      - name: Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          file: ${{ env.FILENAME }}
+          overwrite: true
+          

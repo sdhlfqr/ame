@@ -1,6 +1,6 @@
 # ame
 
-Streamlines NixWindows deployment using AME Playbook.
+Streamlines Windows deployment using AME Playbook.
 
 ## License
 
