@@ -756,16 +756,6 @@ actions:
     data: '1'
     weight: 2
 
-  # Enable Developer mode.
-  - !registryValue:
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock'
-    value: 'AllowDevelopmentWithoutDevLicense'
-    type: REG_DWORD
-    data: '1'
-    weight: 2
-
-  #TODO: DISM /Online /Add-Capability /CapabilityName:Tools.DeveloperMode.Core~~~~0.0.1.0
-
   # Install apps from any downloads directory.
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments'

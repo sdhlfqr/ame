@@ -1,8 +1,770 @@
 ---
 title: config
-description: Optimise software configurations.
+description: Configures system and software.
 privilege: TrustedInstaller
 actions:
-  - !task: { path: 'task\config\adobe-acrobat.yml' }
-  - !task: { path: 'task\config\git.yml' }
-  - !task: { path: 'task\config\ms-office.yml' }
+  - !writeStatus: { status: 'Configuring system and software' }
+
+  #=== Windows
+  # Enable Developer mode.
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock'
+    value: 'AllowDevelopmentWithoutDevLicense'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  - !powerShell:
+    command: 'DISM /Online /Add-Capability /CapabilityName:Tools.DeveloperMode.Core'
+    runas: currentUserElevated
+    wait: true
+    weight: 4
+
+  #=== Adobe Acrobat
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe'
+    operation: add
+    weight: 2
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader'
+    operation: add
+    weight: 2
+
+  #=== Adobe Reader DC
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC'
+    operation: add
+    weight: 2
+
+  # Disable JavaScript.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\JSPrefs'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\JSPrefs'
+    value: 'bEnableJS'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Secure file opening options.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\Originals'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\Originals'
+    value: 'bAllowOpenFile'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\Originals'
+    value: 'bSecureOpenFile'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Enable protected view and mode.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\Privileged'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\Privileged'
+    value: 'bProtectedMode'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\TrustManager'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\TrustManager'
+    value: 'iProtectedView'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Improve security for viewing PDFs in browsers and standalone.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\TrustManager'
+    value: 'bEnhancedSecurityInBrowser'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\DC\TrustManager'
+    value: 'bEnhancedSecurityStandalone'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  #=== Adobe Reader XI
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI'
+    operation: add
+    weight: 2
+
+  # Disable JavaScript.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\JSPrefs'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\JSPrefs'
+    value: 'bEnableJS'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  # Secure file opening options.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\Originals'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\Originals'
+    value: 'bAllowOpenFile'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\Originals'
+    value: 'bSecureOpenFile'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\Privileged'
+    operation: add
+    weight: 2
+
+  # Enable protected view and mode.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\Privileged'
+    value: 'bProtectedMode'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\TrustManager'
+    operation: add
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\TrustManager'
+    value: 'iProtectedView'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Improve security for viewing PDFs in browsers and standalone.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\TrustManager'
+    value: 'bEnhancedSecurityInBrowser'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Adobe\Acrobat Reader\XI\TrustManager'
+    value: 'bEnhancedSecurityStandalone'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+
+  #=== Microsoft Office
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office'
+    operation: add
+    weight: 2
+
+  #=== Office 2007
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0'
+    operation: add
+    weight: 2
+
+  # Excel 2007
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Prompt for confirmation when opening workbooks with links.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Excel\Security'
+    value: 'WorkbookLinkWarnings'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # PowerPoint 2007
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\PowerPoint\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Word 2007
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Options'
+    operation: add
+    weight: 2
+
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Options\vpref'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Word documents.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Options\vpref'
+    value: 'fNoCalclinksOnopen_90_1'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\12.0\Word\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  #=== Office 2010
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0'
+    operation: add
+    weight: 2
+
+  # Excel 2010
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Excel workbooks.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Prompt for confirmation when opening workbooks with links.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Excel\Security'
+    value: 'WorkbookLinkWarnings'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # PowerPoint 2010
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\PowerPoint\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  #=== Word 2010
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Word documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Disable automatic updating of links in Word mail documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options\WordMail'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Options\WordMail'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Disable Dynamic Data Exchange (DDE) for added security.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\14.0\Word\Security'
+    value: 'AllowDDE'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Office 2013
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0'
+    operation: add
+    weight: 2
+
+  # Excel 2013
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Excel workbooks.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Prompt for confirmation when opening workbooks with links.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Excel\Security'
+    value: 'WorkbookLinkWarnings'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # PowerPoint 2013
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\PowerPoint\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Word 2013
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Word documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Disable automatic updating of links in Word mail documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options\WordMail'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options\WordMail'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Disable Dynamic Data Exchange (DDE) for added security.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Security'
+    value: 'AllowDDE'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Office 2016
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0'
+    operation: add
+    weight: 2
+
+  # Excel 2016
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Excel workbooks.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Prompt for confirmation when opening workbooks with links.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Excel\Security'
+    value: 'WorkbookLinkWarnings'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # PowerPoint 2016
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint'
+    operation: add
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\PowerPoint\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Word 2016
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word'
+    operation: add
+    weight: 2
+
+  # Disable automatic updating of links in Word documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Disable automatic updating of links in Word mail documents.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options\WordMail'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options\WordMail'
+    value: 'DontUpdateLinks'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  # Prompt before opening files from an unknown publisher.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
+    value: 'PackagerPrompt'
+    type: REG_DWORD
+    data: '2'
+    weight: 2
+
+  # Disable macros and VBA code execution by default.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
+    value: 'VBAWarnings'
+    type: REG_DWORD
+    data: '4'
+    weight: 2
+
+  # Disable Dynamic Data Exchange (DDE) for added security.
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Security'
+    value: 'AllowDDE'
+    type: REG_DWORD
+    data: '0'
+    weight: 2
+
+  #=== Commons
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\Common'
+    operation: add
+    weight: 2
+
+  # Disable all ActiveX controls.
+  - !registryKey:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\Common\Security'
+    operation: add
+    weight: 2
+
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Office\Common\Security'
+    value: 'DisableAllActiveX'
+    type: REG_DWORD
+    data: '1'
+    weight: 2
+
+  #=== Git
+  # Trust all directories.
+  - !powerShell:
+    command: 'git config --system --add safe.directory "*"'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
+
+  # Disable GCM machine-wide.
+  - !powerShell:
+    command: '[ Environment ]::SetEnvironmentVariable("GCM_INTERACTIVE", "Never", "Machine")'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
+
+  # Save GitHub as a known host.
+  - !powerShell:
+    command: 'ssh-keyscan -t rsa, ecdsa, ed25519 github.com >> "C:\Program Files\Git\etc\ssh\ssh_known_hosts"'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
+
+  # Allow paths longer than the Windows 'MAX_PATH' limit.
+  - !powerShell:
+    command: 'git config --global core.longpaths true'
+    runas: currentUserElevated
+    wait: true
+    weight: 2
