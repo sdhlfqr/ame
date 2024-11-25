@@ -5,9 +5,9 @@ privilege: TrustedInstaller
 actions:
   - !writeStatus: { status: 'Tweaking system for performance, productivity and privacy.' }
 
-  # Disable hibernation to ensure NTFS drives are accessible.
+  # TODO: Disable hibernation to ensure NTFS drives are accessible.
   - !cmd:
-    command: 'powercfg /hibernate off'
+    command: 'powercfg /hibernate /type full'
     weight: 2
 
   # Reduce shutdown time by lowering services and programs timeout.

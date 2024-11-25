@@ -46,23 +46,9 @@ actions:
     wait: true
     weight: 32
 
-  - !writeStatus: { status: 'Installing 7-Zip' }
+  - !writeStatus: { status: 'Installing LibreWolf' }
   - !powerShell:
-    command: 'winget install 7zip.7zip --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 4
-
-  - !writeStatus: { status: 'Installing Deluge' }
-  - !powerShell:
-    command: 'winget install DelugeTeam.Deluge --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 38
-
-  - !writeStatus: { status: 'Installing Ungoogled Chromium Browser' }
-  - !powerShell:
-    command: 'winget install eloston.ungoogled-chromium --accept-source-agreements --accept-package-agreements'
+    command: 'winget install LibreWolf.LibreWolf --accept-source-agreements --accept-package-agreements'
     runas: currentUserElevated
     wait: true
     weight: 92
@@ -73,20 +59,6 @@ actions:
     runas: currentUserElevated
     wait: true
     weight: 32
-
-  - !writeStatus: { status: 'Installing Spotify' }
-  - !powerShell:
-    command: 'winget install Spotify.Spotify --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 104
-
-  - !writeStatus: { status: 'Installing Media Player Classic' }
-  - !powerShell:
-    command: 'winget install CodecGuide.K-LiteCodecPack.Standard --accept-source-agreements --accept-package-agreements'
-    runas: currentUserElevated
-    wait: true
-    weight: 36
 
   - !writeStatus: { status: 'Installing Steam' }
   - !powerShell:
@@ -112,7 +84,7 @@ actions:
   - !writeStatus: { status: 'Installing Git' }
   - !powerShell:
     command: |
-      winget install Git.Git --custom\
+      winget install Git.Git --custom \
       "/SP- \
       /VERYSILENT \
       /NOCANCEL \
@@ -132,7 +104,7 @@ actions:
       /o:UseCredentialManager=Disabled \
       /o:PerformanceTweaksFSCache=Enabled \
       /o:EnableSymlinks=Enabled" \
-      --accept-source-agreements --accept-package-agreements'
+      --accept-source-agreements --accept-package-agreements
     runas: currentUserElevated
     wait: true
     weight: 68

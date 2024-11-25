@@ -1,6 +1,6 @@
 # ame
 
-Streamlines Windows deployment using AME Playbook.
+Amelioration Playbook for Windows 10. A lightweight and stable system with performance and security enhancements.
 
 ## License
 
